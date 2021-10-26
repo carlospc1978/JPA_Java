@@ -2,6 +2,8 @@ package br.com.seteideias.loja.modelo;
 
 import javax.persistence.*;
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.Date;
 
 @Entity
 @Table(name = "produtos") // ponte pra converter para a tabela correta
@@ -14,6 +16,33 @@ public class Produto {
     @Column(name = "descricao") // caso fosse diferente
     private String descricao;
     private BigDecimal preco;
+    private LocalDate dataDeCadastro = LocalDate.now();
+
+    @ManyToOne
+    private Categoria categoria;
+
+    public Produto(String nome, String descricao, BigDecimal preco, Categoria categoria) {
+        this.nome = nome;
+        this.descricao = descricao;
+        this.preco = preco;
+        this.categoria = categoria;
+    }
+
+    public LocalDate getDataDeCadastro() {
+        return dataDeCadastro;
+    }
+
+    public void setDataDeCadastro(LocalDate dataDeCadastro) {
+        this.dataDeCadastro = dataDeCadastro;
+    }
+
+    public Categoria getCategoria() {
+        return categoria;
+    }
+
+    public void setCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
 
     public Long getId() {
         return id;
